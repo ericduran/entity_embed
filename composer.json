@@ -1,9 +1,10 @@
 {
   "name": "drupal/entity_embed",
   "description": "Allows entities to be rendered using a text format.",
-  "type": "drupal-module",
   "license": "GPL-2.0+",
-  "minimum-stability": "dev",
-  "require": { }
+  "require-dev": {
+    "drush/drush": "dev-master",
+    "squizlabs/php_codesniffer": "2.0.0RC1",
+    "drupal/coder": "8.2.0-alpha2"
+  }
 }
-
