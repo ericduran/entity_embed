@@ -15,38 +15,16 @@ matrix:
   allow-failures:
     - php: 5.5
 
-before_install:
-  # Ensure we have the latest sources.
-  - sudo apt-get -y update
-
-  # Composer.
-  - sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' $HOME/.bashrc
-  - source $HOME/.bashrc
-  # - composer self-update
-
-  # Drush.
-  - composer global require "youngj/httpserver:dev-master#41dd2b7"
-  - composer global require drush/drush:dev-master
-
-  # Codesniffer.
-  - composer global require squizlabs/php_codesniffer:$PHPCS_VERSION
-
-  # Coder.
-  - composer global require drupal/coder:$CODER_VERSION
-  - ln -s ~/.composer/vendor/drupal/coder/coder_sniffer/Drupal ~/.composer/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/
-
-  # Ensure the PHP environment is ready.
-  - phpenv rehash
-
 install:
-  # Basic PHP packages.
-  - sudo apt-get install -y --force-yes php5-cgi php5-mysql
-
   # Move the checked out module into the correct structure.
   - mkdir /tmp/$MODULE_NAME
   - mv * /tmp/$MODULE_NAME/
   - git clone --branch $DRUPAL_VERSION $DRUPAL_REPO drupal --depth 1
   - mv /tmp/$MODULE_NAME drupal/modules/
+  - cd drupal/modules/$MODULE_NAME
+
+  # Install dependencies.
+  - composer install
 
 before_script:
   # This fixes a fail when install Drupal.
