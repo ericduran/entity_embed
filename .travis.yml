@@ -35,12 +35,10 @@ before_script:
   - ./vendor/bin/drush --yes site-install testing --db-url="mysql://root@127.0.0.1/drupal"
   - ./vendor/bin/drush --yes en $MODULE_NAME simpletest
 
-  # Start a web server.
-  - nohup ./vendor/bin/drush runserver 127.0.0.1:8080 &
-
 script:
   # Run code sniffer.
   - ./vendor/bin/phpcs --report=full --standard=./vendor/drupal/coder/coder_sniffer/Drupal --ignore="./vendor/*" --extensions=module,php .
 
-  # Run the tests
+  # Start a web server.
+  - nohup ./vendor/bin/drush runserver 127.0.0.1:8080 &
   - ./vendor/bin/drush test-run --uri=http://127.0.0.1:8080 entity_embed
