@@ -32,9 +32,8 @@ before_script:
 
   # Install Drupal and enable the required modules (including this one).
   - mysql -e 'create database drupal;'
-  - cd $TRAVIS_BUILD_DIR/drupal && drush --yes site-install testing --db-url="mysql://root@127.0.0.1/drupal"
-  - cd $TRAVIS_BUILD_DIR/drupal && drush --yes en $MODULE_NAME
-  - cd $TRAVIS_BUILD_DIR/drupal && drush --yes en simpletest
+  - ./vendor/bin/drush --yes site-install testing --db-url="mysql://root@127.0.0.1/drupal"
+  - ./vendor/bin/drush --yes en $MODULE_NAME simpletest
 
   # Start a web server.
   - drush runserver 127.0.0.1:8080 &
