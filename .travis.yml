@@ -43,4 +43,4 @@ script:
   - ./vendor/bin/phpcs --report=full --standard=./vendor/drupal/coder/coder_sniffer/Drupal --ignore="./vendor/*" --extensions=module,php .
 
   # Run the tests
-  - ./vendor/bin/drush test-run --uri http://127.0.0.1:8080 entity_embed
+  - ./vendor/bin/drush test-run --uri=http://127.0.0.1:8080 entity_embed
